@@ -4,9 +4,9 @@
 
 <table>
   <tr>
-    <th><h3>Branch name</h3></th>
-    <th><h3>Description</h3></th>
-    <th><h3>Technologies used</h3></th>
+    <th><h5>Branch name</h5></th>
+    <th><h5>Description</h5></th>
+    <th><h5>Technologies used</h5></th>
   </tr>
 </table>
 
