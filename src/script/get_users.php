@@ -6,7 +6,6 @@ use App\Model\Database;
 use App\Model\UserModel;
 use App\Utils\UnitOfWork;
 
-
 header('Content-Type: application/json');
 
 UnitOfWork::setDb(new Database());
