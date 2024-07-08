@@ -4,47 +4,61 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\Database;
-use App\Model\UserModel;
-use App\Utils\UnitOfWork;
-use Exception;
-use PDO;
+use App\Entity\User;
+use App\Factory\UserFactory;
+use Doctrine\ORM\Exception\ORMException;
+use App\App;
 
 class UserController
 {
-    public function __construct(protected ?UserModel $userModel = null)
+    public function getUser(int $id): ?User
     {
-        $this->userModel = $userModel ?? new UserModel(UnitOfWork::getDb());
+        return App::getEntityManager()->getRepository(User::class)->find($id);
     }
 
-
-    public function getUser(int $id): array
+    public function getByLogin(string $login): ?User
     {
-        return $this->userModel->find($id);
+        return App::getEntityManager()->getRepository(User::class)->findOneBy(['login' => $login]);
     }
 
     public function getAll(): array
     {
-        return $this->userModel->getAll();
+        return App::getEntityManager()->getRepository(User::class)->findAll();
     }
 
-    public function remove(?string $id, string $table = 'users'): bool
+    public function remove(?string $id): bool
     {
-        if ($id === '') {
-            echo 'Error id is null';
+        try {
+            $user = $this->getUser((int)$id);
+
+            if ($user === null) {
+                return false;
+            }
+
+            App::getEntityManager()->remove($this->getUser((int)$id));
+            App::getEntityManager()->flush();
+            return true;
+        } catch (ORMException $e) {
+            echo $e->getMessage();
             return false;
         }
-        $this->userModel->removeById(intval($id));
-        return true;
     }
 
-    /** @throws Exception */
-    public function add(?string $login, string $table = 'users'): bool
+    public function add(?string $login, ?string $mail): bool
     {
-        if ($login === '') {
-            throw new Exception('Empty login exception');
+        if ($login !== '' && $mail !== '') {
+            $user = UserFactory::create($login, $mail, new \DateTime());
+
+            try {
+                App::getEntityManager()->persist($user);
+                App::getEntityManager()->flush();
+                return true;
+            } catch (ORMException $e) {
+                echo $e->getMessage();
+                return false;
+            }
         }
-        $this->userModel->add($login, $table);
-        return true;
+
+        return false;
     }
 }
