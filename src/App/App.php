@@ -7,6 +7,8 @@ namespace App;
 use App\Utils\MigrationManager\MigrationManager;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Common\DataFixtures\Loader;
+use Twig\Environment;
 
 class App
 {
@@ -15,6 +17,31 @@ class App
     private static DependencyFactory $dependencyFactory;
 
     private static MigrationManager $migrationManager;
+
+    private static Loader $fixturesLoader;
+
+    private static Environment $twigProvider;
+
+    public static function getTwigProvider(): Environment
+    {
+        return self::$twigProvider;
+    }
+
+    public static function setTwigProvider(Environment $twigProvider): void
+    {
+        self::$twigProvider = $twigProvider;
+    }
+
+
+    public static function getFixturesLoader(): Loader
+    {
+        return self::$fixturesLoader;
+    }
+
+    public static function setFixturesLoader(Loader $fixturesLoader): void
+    {
+        self::$fixturesLoader = $fixturesLoader;
+    }
 
 
     public static function init(): void
