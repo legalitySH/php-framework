@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
-use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
-use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
+use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\Migrations\Configuration\Migration\YamlFile;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 use App\App;
 use Dotenv\Dotenv;
 
-require './vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -37,10 +38,23 @@ $entityManagerProvider = new SingleManagerProvider($entityManager);
 
 $migrationsConfig = new YamlFile(__DIR__ . '/config/package/doctrine_migrations.yaml');
 
-$dependencyFactory = DependencyFactory::fromEntityManager($migrationsConfig, new ExistingEntityManager($entityManager));
+$dependencyFactory = DependencyFactory::fromEntityManager(
+    $migrationsConfig,
+    new ExistingEntityManager($entityManager)
+);
 
 $dependencyFactory->getMigrationRepository();
 
+$fixturesLoader = new Loader();
+$fixturesLoader->addFixture(new \App\Test\Resource\Fixture\UserFixtures());
+
+$twigLoader = new FilesystemLoader(__DIR__ . '/App/View');
+$twigProvider = new Environment($twigLoader, [
+    'cache' => false
+]);
+
 App::setEntityManager($entityManager);
 App::setDependencyFactory($dependencyFactory);
+App::setFixturesLoader($fixturesLoader);
+App::setTwigProvider($twigProvider);
 App::init();
