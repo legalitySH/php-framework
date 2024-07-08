@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
-require './vendor/autoload.php';
-require './routes.php';
+use App\App;
+use Bramus\Router\Router;
 
+require 'bootstrap.php';
+require 'routes.php';
