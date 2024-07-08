@@ -1,0 +1,45 @@
+{% extends 'base.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h2 id="header-text">Cookies example</h2>
+    <form id="cookie-form" method="post">
+        <p>cookie key:
+            <input class="text-input key" type="text" name="cookieKey">
+            → cookie value:
+            <input class="text-input key" type="text" name="cookieValue">
+            → cookie expiration time:
+            <input class="text-input key" type="text" name="cookieExpirationTime">
+            <button class="btn cookie-submit-btn" type="submit">Create cookie</button>
+        </p>
+    </form>
+
+    <table id="cookie-table">
+        <thead>
+        <tr>
+            <th>Cookie Key</th>
+            <th>Cookie Value</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for key, value in cookies %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+                <td>
+                    <form method="post" class="cookie-remove-form">
+                        <input type="hidden" name="delete-cookie" value="{{ key }}">
+                        <button class="btn kill" type="submit">Kill</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./../../script/ajax.js"></script>
+{% endblock %}
