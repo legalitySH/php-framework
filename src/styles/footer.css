@@ -1,0 +1,23 @@
+@import "fonts.css";
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 1vh;
+    background-color: blueviolet;
+    padding: 10px 0 10px 0;
+}
+
+#footer-header-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: white;
+}
+
+#footer-year-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: darkslategray;
+}

@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: lightgray;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-container {
+    width: 95%;
+    display: flex;
+    margin: 0 auto;
+    height: 100%;
+    flex-direction: column;
+}
+
+#header-text {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 20px;
+}
+
+#cookie-form {
+    margin-top: 20px;
+}
+
+.cookie-submit-btn {
+    height: 3vh;
+    width: 100px;
+}
+
+.text-input {
+    background-color: #71bcff;
+    color: black;
+    border: 1px solid black;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.key {
+    margin-left: 10px;
+}
+
+.btn {
+    background-color: darkorchid;
+    border-radius: 5px;
+    color: white;
+}
+
+.kill {
+    background-color: #ff5151;
+    width: 60px;
+    height: 3vh;
+}
+
+#cookie-table {
+    border: 1px solid black;
+    width: 40%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#start-session-btn {
+    width: 120px;
+    margin-top: 2vw;
+    background-color: #0cbf0c;
+    height: 35px;
+    color: blue;
+
+}
+
+
+#abort-session-btn {
+    width: 120px;
+    margin-top: 2vw;
+    background-color: #c81717;
+    height: 35px;
+    color: white;
+    margin-left: 20px;
+}
+
+#text-area {
+    margin-top: 20px;
+    width: 400px;
+    height: 120px;
+}
+
+.session-buttons-container {
+    display: flex;
+    align-items: center;
+}
+
+.session-status-paragraph {
+    margin-top: 22px;
+    margin-left: 10px;
+}

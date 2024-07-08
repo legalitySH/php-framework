@@ -1,0 +1,29 @@
+@import "fonts.css";
+
+.menu-container {
+    background-color: blueviolet;
+}
+
+.menu-buttons {
+    padding: 10px 0 10px 0;
+    margin-left: 1vw;
+    display: flex;
+    gap: 4vh;
+    width: 60%;
+    list-style-type: none;
+}
+
+.menu-btn a {
+    text-decoration: none;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+}
+
+.menu-btn a:hover {
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.2s;
+    font-size: 20px;
+    text-decoration-line: underline;
+}
