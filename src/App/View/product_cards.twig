@@ -1,0 +1,13 @@
+<div class="product-container">
+    {% for product in products %}
+        <div class="product-card">
+            <p>{{ product.productName }}</p>
+            <p>Price: {{ product.cost }}</p>
+            <p>Category: {{ product.category.name }}</p>
+            <form class="to-basket-form" method="get">
+                <input name="product_id" type="hidden" value="{{ product.id }}">
+                <button type="submit" class="cookie-submit-btn"> Add to bucket</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
