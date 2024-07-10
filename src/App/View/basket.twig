@@ -1,0 +1,27 @@
+{% extends 'base.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1 id="header-text">Basket</h1>
+
+    <div class="basket-container">
+        {% for basketOrder in basketOrders %}
+            <div class="basket-card card-{{ basketOrder.id }}">
+                <p>{{ basketOrder.product.productName }}</p>
+                <p>Price: {{ basketOrder.product.cost }}</p>
+                <p>Category: {{ basketOrder.product.category.name }}</p>
+                <p>Amount: {{ basketOrder.count }}</p>
+                <p>Total: {{ basketOrder.count * basketOrder.product.cost }}</p>
+
+                <form method="post" id="delete-from-basket-form">
+                    <input type="hidden" name="basket_id" value="{{ basketOrder.id }}">
+                    <button type="submit" class="btn btn-danger">Delete from basket</button>
+                </form>
+            </div>
+        {% endfor %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./../../script/basketAjax.js"></script>
+    </div>
+{% endblock %}
