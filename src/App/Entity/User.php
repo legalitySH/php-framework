@@ -46,6 +46,7 @@ class User
         return $this->id;
     }
 
+
     public function getLogin(): string
     {
         return $this->login;
