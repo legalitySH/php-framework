@@ -2,7 +2,24 @@
 
 {% block title %}{{ title }}{% endblock %}
 
-
 {% block content %}
-    
+    <form id="sortingForm">
+        <div class="sorting-radio-buttons-container">
+            <div>
+                <input checked="checked" type="radio" name="sortingType" value="price_descending">
+                <label for="price_descending">Price descending</label>
+            </div>
+
+            <div>
+                <input type="radio" name="sortingType" value="price_ascending">
+                <label for="price_ascending">Price ascending</label>
+            </div>
+
+        </div>
+    </form>
+
+    {% include 'product_cards.twig' with {'producs': products } %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./../../script/productAjax.js"></script>
 {% endblock %}

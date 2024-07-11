@@ -6,6 +6,7 @@
     <h1 id="header-text">Basket</h1>
 
     <div class="basket-container">
+        {% if isAuthorized %}
         {% for basketOrder in basketOrders %}
             <div class="basket-card card-{{ basketOrder.id }}">
                 <p>{{ basketOrder.product.productName }}</p>
@@ -20,6 +21,10 @@
                 </form>
             </div>
         {% endfor %}
+
+        {% else %}
+            <p>You are not authorized</p>
+        {% endif %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="./../../script/basketAjax.js"></script>

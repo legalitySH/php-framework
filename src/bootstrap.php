@@ -12,6 +12,8 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Predis\Client;
+use App\Cache\Strategy\RedisStrategy;
 use App\App;
 use Dotenv\Dotenv;
 
@@ -46,13 +48,21 @@ $dependencyFactory = DependencyFactory::fromEntityManager(
 $dependencyFactory->getMigrationRepository();
 
 $fixturesLoader = new Loader();
-$fixturesLoader->addFixture(new \App\Test\Resource\Fixture\UserFixtures());
+$fixturesLoader->addFixture(new \App\Test\Resource\Fixture\CategoryFixture());
+$fixturesLoader->addFixture(new \App\Test\Resource\Fixture\ProductFixture());
 
 $twigLoader = new FilesystemLoader(__DIR__ . '/App/View');
 $twigProvider = new Environment($twigLoader, [
     'cache' => false
 ]);
 
+$client = new Client([
+    'scheme' => 'tcp',
+    'host' => $_ENV['REDIS_HOST'],
+    'port' => $_ENV['REDIS_PORT']
+]);
+
+App::setCacheStrategy(new RedisStrategy($client));
 App::setEntityManager($entityManager);
 App::setDependencyFactory($dependencyFactory);
 App::setFixturesLoader($fixturesLoader);

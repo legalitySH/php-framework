@@ -4,7 +4,7 @@ $(document).ready(function () {
         addToBasket($(this));
     });
 
-    $('input[name="sortingType"]').change(function (event) {
+    $('input[name="sortingType"]').change(function () {
         const selectedValue = $(this).val();
         localStorage.setItem('sortingType', selectedValue);
         $('#sortingForm').submit();

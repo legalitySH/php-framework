@@ -11,7 +11,6 @@ use App\Sort\Product\Strategy\SortByPriceDescendingStrategy;
 
 class StrategyBuilder implements StrategyBuilderInterface
 {
-
     public function build(string $type): StrategyInterface
     {
         return match ($type) {

@@ -7,7 +7,7 @@ namespace App\Test\Tools;
 use Faker\Factory;
 use Faker\Generator;
 
-trait FakerTools
+trait FakerProviderTrait
 {
     protected function getFaker(): Generator
     {

@@ -36,9 +36,11 @@ class Basket
         return $this->user;
     }
 
-    public function setUser(User $user): void
+    public function setUser(User $user): static
     {
         $this->user = $user;
+
+        return $this;
     }
 
     #[Column]
@@ -59,9 +61,11 @@ class Basket
         $this->id = $id;
     }
 
-    public function setProduct(Product $product): void
+    public function setProduct(Product $product): static
     {
         $this->product = $product;
+
+        return $this;
     }
 
     public function getCount(): int
@@ -69,8 +73,10 @@ class Basket
         return $this->count;
     }
 
-    public function setCount(int $count): void
+    public function setCount(int $count): static
     {
         $this->count = $count;
+
+        return $this;
     }
 }

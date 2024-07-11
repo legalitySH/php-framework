@@ -2,6 +2,14 @@
 
 .menu-container {
     background-color: blueviolet;
+    display: flex;
+    gap: 60vw;
+}
+
+.auth-buttons {
+    display: flex;
+    width: 20%;
+    list-style-type: none;
 }
 
 .menu-buttons {

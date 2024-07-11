@@ -13,12 +13,8 @@ class BasketFactory implements BasketFactoryInterface
 {
     public function create(Product $product, User $user, int $count = 1): Basket
     {
-        $basket = new Basket();
-
-        $basket->setCount($count);
-        $basket->setProduct($product);
-        $basket->setUser($user);
-
-        return $basket;
+        return (new Basket())->setCount($count)
+            ->setProduct($product)
+            ->setUser($user);
     }
 }

@@ -23,6 +23,7 @@ class ProductController
     public function getAllProducts(?StrategyInterface $sortStrategy = new SortByPriceDescendingStrategy()): array
     {
        $sorter = new Sorter($sortStrategy);
+
        return $sorter->sort(App::getEntityManager()->getRepository(Product::class)->findAll());
     }
 }

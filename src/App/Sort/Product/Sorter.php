@@ -8,11 +8,9 @@ use App\Sort\Product\Api\StrategyInterface;
 
 class Sorter
 {
-    private StrategyInterface $sortStrategy;
 
-    public function __construct(StrategyInterface $sortStrategy)
+    public function __construct(private StrategyInterface $sortStrategy)
     {
-        $this->sortStrategy = $sortStrategy;
     }
 
     public function setSortStrategy(StrategyInterface $sortStrategy): void

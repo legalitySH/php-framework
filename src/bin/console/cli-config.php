@@ -7,6 +7,7 @@ use Doctrine\Migrations\Tools\Console\Command;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand as SchemaCreateCommand;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand as SchemaUpdateCommand;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand as SchemaDropCommand;
+use Doctrine\ORM\Tools\Console\Command\InfoCommand;
 
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../../bootstrap.php';
@@ -34,6 +35,8 @@ if (isset($dependencyFactory) && isset($entityManagerProvider)) {
         new SchemaCreateCommand($entityManagerProvider),
         new SchemaUpdateCommand($entityManagerProvider),
         new SchemaDropCommand($entityManagerProvider),
+
+        new InfoCommand($entityManagerProvider)
     ));
 }
 

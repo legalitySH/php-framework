@@ -10,6 +10,7 @@ services:
     restart: always
     depends_on:
       - php-fpm
+      - redis
       - postgres
     networks:
       - app-network
@@ -46,6 +47,18 @@ services:
       - ./volumes/postgres:/var/lib/postgresql/data
     networks:
       - app-network
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - app-network
+
 
 networks:
   app-network:

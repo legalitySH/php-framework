@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Cache\CacheProvider;
+use App\Entity\User;
 use App\Utils\MigrationManager\MigrationManager;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\DataFixtures\Loader;
+use Predis\Client;
+use Psr\SimpleCache\CacheInterface;
 use Twig\Environment;
 
 class App
@@ -21,6 +25,20 @@ class App
     private static Loader $fixturesLoader;
 
     private static Environment $twigProvider;
+
+    private static CacheProvider $cacheProvider;
+
+    public static function getCacheProvider(): CacheProvider
+    {
+        return self::$cacheProvider;
+    }
+
+
+    public static function setCacheStrategy(CacheInterface $service): void
+    {
+        self::$cacheProvider = new CacheProvider($service);
+    }
+
 
     public static function getTwigProvider(): Environment
     {
@@ -69,4 +87,10 @@ class App
     {
         self::$entityManager = $entityManager;
     }
+
+    public static function getAuthorizedUser(): ?User
+    {
+        return App::getEntityManager()->getRepository(User::class)->findAll()[0];
+    }
+
 }
